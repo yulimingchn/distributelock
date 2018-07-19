@@ -1,4 +1,4 @@
-package com.dawn.banana.distriutelock.deadlock;
+package com.dawn.banana.distributelock.deadlock;
 
 
 /**
