@@ -36,4 +36,22 @@ public class DistributelockApplicationTests {
 
 	}
 
+
+	@Test
+	public void testDistributeLockTemplate(){
+
+		for (int i=100;i<1000;i++){
+			int num = i/10;
+
+			String phone = "150553542" + num;
+
+			userInfoService.sendD(phone);
+
+		}
+
+
+	}
+
+
+
 }

@@ -46,6 +46,14 @@ public class UserInfoService {
 
         }
 
+    public void sendD(String phone){
+
+        System.out.println(phone+"_"+new Date());
+
+        rabbitTemplate.convertAndSend(RabbitMQConfig.RABBITMQ_QUEUE_DAWN_USER_INFO_D,phone);
+
+    }
+
 
     }
 
