@@ -38,7 +38,7 @@ public class DistributedLockTestController {
         for (int i=0;i< count;i++){
             new Thread(new Worker1(startSignal,doneSignal,distributedLockManager,redissonClient)).start();
         }
-        //let all threads proceed
+        //let all threads proceed,让所有线程通过
         startSignal.countDown();
         doneSignal.await();
         System.out.println("all processors done.ShutDown connection");

@@ -28,6 +28,7 @@ public class Worker1 implements Runnable {
         try {
             System.out.println(Thread.currentThread().getName() + " start");
 
+
             startSignal.await();
 
             Integer count = distributedLockManager.aspect(() -> aspect());
