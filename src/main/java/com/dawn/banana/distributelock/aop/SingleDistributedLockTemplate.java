@@ -2,17 +2,20 @@ package com.dawn.banana.distributelock.aop;
 
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Dawn on 2018/7/20.
  */
+@Component
 public class SingleDistributedLockTemplate implements DistributedLockTemplate {
 
+    @Autowired
     private RedissonClient redisson;
 
-    public SingleDistributedLockTemplate(){}
 
     public SingleDistributedLockTemplate(RedissonClient redisson){
 
