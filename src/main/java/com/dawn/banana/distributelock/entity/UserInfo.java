@@ -1,12 +1,15 @@
 package com.dawn.banana.distributelock.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 /**
- * Created by Dawn on 2018/7/18.
+ * @author Dawn on 2018/7/18.
  */
 
 @Table(name = "user_info")
+@Data
 public class UserInfo {
 
     @Id
@@ -25,43 +28,4 @@ public class UserInfo {
     @Column(name = "phone",length = 15,nullable = false)
     private String phone;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }

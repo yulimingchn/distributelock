@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Dawn on 2018/7/20.
+ * @author  Dawn on 2018/7/20.
  */
 @Component
 public class SingleDistributedLockTemplate implements DistributedLockTemplate {
@@ -25,7 +25,7 @@ public class SingleDistributedLockTemplate implements DistributedLockTemplate {
 
     @Override
     public Object lock(DistributedLockCallback callback, boolean fairLock) {
-        return lock(callback,DEFAULT_TIMW_OUT,DEFAULT_TIME_UNIT,fairLock);
+        return lock(callback, DEFAULT_TIME_OUT,DEFAULT_TIME_UNIT,fairLock);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class SingleDistributedLockTemplate implements DistributedLockTemplate {
 
     @Override
     public Object tryLock(DistributedLockCallback callback, boolean fairLock) {
-        return tryLock(callback,DEFAULT_WAIT_TIME,DEFAULT_TIMW_OUT,DEFAULT_TIME_UNIT,fairLock);
+        return tryLock(callback,DEFAULT_WAIT_TIME, DEFAULT_TIME_OUT,DEFAULT_TIME_UNIT,fairLock);
 
     }
 

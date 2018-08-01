@@ -3,14 +3,14 @@ package com.dawn.banana.distributelock.aop;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Dawn on 2018/7/20.
+ * @author dawn
  * 分布式锁模板
  */
 public interface DistributedLockTemplate<T> {
 
     long DEFAULT_WAIT_TIME = 30;
 
-    long DEFAULT_TIMW_OUT = 5;
+    long DEFAULT_TIME_OUT = 5;
 
     TimeUnit DEFAULT_TIME_UNIT = TimeUnit.SECONDS;
 
@@ -18,6 +18,7 @@ public interface DistributedLockTemplate<T> {
      * 使用分布式锁，使用锁默认超时时间
      * @param callback
      * @param fairLock 是否使用公平锁
+     *  @return
      */
      T lock(DistributedLockCallback<T> callback,boolean fairLock);
 
@@ -28,7 +29,7 @@ public interface DistributedLockTemplate<T> {
      * @param leaseTime 锁超时时间，超时后自动释放锁
      * @param timeUnit
      * @param fairLock 是否使用公平锁
-     * @param <T>
+     * @param
      * @return
      */
      T lock(DistributedLockCallback<T> callback,long leaseTime,TimeUnit timeUnit,boolean fairLock);
@@ -37,7 +38,7 @@ public interface DistributedLockTemplate<T> {
      * 尝试分布式锁，使用默认的等待时间，超时时间
      * @param callback
      * @param fairLock
-     * @param <T>
+     * @param
      * @return
      */
     T tryLock(DistributedLockCallback<T> callback,boolean fairLock);
@@ -50,7 +51,7 @@ public interface DistributedLockTemplate<T> {
      * @param leaseTime 锁超时时间，超时后自动释放
      * @param timeUnit
      * @param fairLock 是否使用公平锁
-     * @param <T>
+     * @param
      * @return
      */
      T tryLock(DistributedLockCallback<T> callback,long waitTime,long leaseTime,TimeUnit timeUnit,boolean fairLock);
