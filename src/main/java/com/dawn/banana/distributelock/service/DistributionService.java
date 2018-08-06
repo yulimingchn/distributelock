@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by Dawn on 2018/7/21.
+ * @author  Dawn on 2018/7/21.
  */
 @Service
 public class DistributionService {

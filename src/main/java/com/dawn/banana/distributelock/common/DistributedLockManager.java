@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.function.Supplier;
 
 /**
- * Created by Dawn on 2018/7/22.
+ * @author  Dawn on 2018/7/22.
  */
 @Component
 public class DistributedLockManager {

@@ -1,7 +1,7 @@
 package com.dawn.banana.distributelock.aop;
 
 /**
- * Created by Dawn on 2018/7/20.
+ * @author  Dawn on 2018/7/20.
  */
 public interface DistributedLockCallback<T> {
 
@@ -15,6 +15,7 @@ public interface DistributedLockCallback<T> {
 
     /**
      * 得到分布式锁的名称
+     * @return
      */
     String getLockName();
 
