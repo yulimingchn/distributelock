@@ -6,7 +6,7 @@ import org.redisson.api.RedissonClient;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * Created by Dawn on 2018/7/22.
+ * @author  Dawn on 2018/7/22.
  */
 public class Worker1 implements Runnable {
 
@@ -35,9 +35,10 @@ public class Worker1 implements Runnable {
 
             System.out.println(Thread.currentThread().getName() + ": count = " + count);
 
-            doneSignal.countDown();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            doneSignal.countDown();
         }
     }
 
@@ -45,7 +46,7 @@ public class Worker1 implements Runnable {
         return distributedLockManager.aspect(lockName, this);
     }
 
-    public int aspectBusiness(String lockName) {
+    public Integer aspectBusiness(String lockName) {
         RMap<String, Integer> map = redissonClient.getMap("distributionTest");
 
         Integer count = map.get("count");
@@ -58,7 +59,7 @@ public class Worker1 implements Runnable {
         return count;
     }
 
-    private int aspect() {
+    private Integer aspect() {
         RMap<String, Integer> map = redissonClient.getMap("distributionTest");
 
         Integer count1 = map.get("count");

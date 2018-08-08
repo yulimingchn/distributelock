@@ -7,7 +7,7 @@ import org.redisson.api.RedissonClient;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * Created by Dawn on 2018/7/22.
+ * @author  Dawn on 2018/7/22.
  */
 public class Worker implements Runnable {
 
@@ -42,10 +42,12 @@ public class Worker implements Runnable {
                 return count1;
             });
             System.out.println(Thread.currentThread().getName()+": count = " + count);
-            doneSignal.countDown();
+
         }catch (InterruptedException ex){
 
             System.out.println(ex);
+        }finally {
+            doneSignal.countDown();
         }
 
     }

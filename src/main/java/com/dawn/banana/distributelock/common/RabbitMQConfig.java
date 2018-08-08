@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by Dawn on 2018/7/19.
+ * @author Dawn on 2018/7/19.
  */
 @Configuration
 public class RabbitMQConfig {

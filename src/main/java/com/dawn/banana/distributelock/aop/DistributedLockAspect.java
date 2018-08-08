@@ -15,43 +15,30 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Dawn on 2018/7/21.
+ * @author  Dawn on 2018/7/21.
  */
 @Component
 @Aspect
 public class DistributedLockAspect {
-
     @Autowired
     private DistributedLockTemplate distributedLockTemplate;
-
-
     @Pointcut("@annotation(com.dawn.banana.distributelock.aop.DistributedLock)")
     public void DistributedLockAspect(){
 
     }
-
     @Around(value = "DistributedLockAspect()")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint)throws Throwable{
-
         //切点所在的类
         Class targetClass = proceedingJoinPoint.getTarget().getClass();
-
         //使用了注解的方法
         String methodName = proceedingJoinPoint.getSignature().getName();
-
         Class [] parameterTypes = ((MethodSignature)proceedingJoinPoint.getSignature()).getMethod().getParameterTypes();
-
         Method method = targetClass.getMethod(methodName,parameterTypes);
-
         Object[] arguments = proceedingJoinPoint.getArgs();
-
         final  String lockName = getLockName(method,arguments);
-
         return lock(proceedingJoinPoint,method,lockName);
 
     }
-
-
     @AfterThrowing(value = "DistributedLockAspect()",throwing = "ex")
     public void afterThrowing(Throwable ex){
         throw  new RuntimeException(ex);
