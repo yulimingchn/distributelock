@@ -60,11 +60,8 @@ public class TestRedissonLock {
     public void useDistributeLockTemplate(String phone){
 
         LOGGER.info("接受到消息，消息内容为"+phone);
-
         SingleDistributedLockTemplate singleDistributedLockTemplate = new SingleDistributedLockTemplate(redissonClient);
-
         final String lockName = "userInfoLock";
-
         //lambda的依据是必须有相应的函数接口（函数接口是指内部只有一个抽象方法的接口）
         singleDistributedLockTemplate.tryLock(new DistributedLockCallback() {
             @Override
@@ -73,24 +70,19 @@ public class TestRedissonLock {
                 UserInfo userInfo = new UserInfo();
                 userInfo.setPhone(phone);
                 UserInfo exist =userInfoMapper.selectOne(userInfo);
-
                 if (exist == null){
                     userInfo.setName(phone+"thread"+Thread.currentThread().getId());
                     userInfo.setAge(28);
                     userInfo.setSex(1);
                     userInfoMapper.insert(userInfo);
                 }
-
                 return null;
             }
-
             @Override
             public String getLockName() {
                 return lockName;
             }
         },true);
-
-
     }
 
 

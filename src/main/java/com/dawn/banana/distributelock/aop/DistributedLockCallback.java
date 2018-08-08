@@ -12,7 +12,6 @@ public interface DistributedLockCallback<T> {
 
      T process();
 
-
     /**
      * 得到分布式锁的名称
      * @return
