@@ -23,15 +23,13 @@ public class RedisTool {
      * @return 是否获取成功
      */
     public static boolean tryGetDistributedLock(Jedis jedis, String lockKey, String requestId, int expireTime) {
-
-        String result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);
-
-        if (LOCK_SUCCESS.equals(result)) {
-            return true;
+        while (true){
+            String result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);
+            System.out.println(requestId+"线程加锁的结果是"+result);
+            if (LOCK_SUCCESS.equals(result)) {
+                return true;
+            }
         }
-        return false;
-
-
     }
 
     public static void wrongGetLock1(Jedis jedis, String lockKey, String requestId, int expireTime) {
@@ -82,7 +80,7 @@ public class RedisTool {
 
         String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
         Object result = jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(requestId));
-
+        System.out.println(requestId+"线程释放锁的结果:"+result.toString());
         if (RELEASE_SUCCESS.equals(result)) {
             return true;
         }

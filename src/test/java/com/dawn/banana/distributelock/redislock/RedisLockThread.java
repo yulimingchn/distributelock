@@ -9,6 +9,7 @@ public class RedisLockThread extends Thread{
     public RedisLockThread(RedisLockService redisLockService){
         this.redisLockService = redisLockService;
     }
+
     public void run(){
         redisLockService.seckill();
     }

@@ -32,24 +32,26 @@ public class RedisLockService {
 
     public void seckill() {
 
-        String requestId = UUID.randomUUID().toString();
+        String requestId = Thread.currentThread().getName();
         Jedis jedis = pool.getResource();
         try {
-            boolean flag = RedisTool.tryGetDistributedLock(jedis,"resource",requestId, 1000);
-            if (flag){
-                String count = jedis.hget("countMap","count");
-                if (StringUtils.isEmpty(count)){
-                    jedis.hset("countMap","count","100");
-                }else {
+            boolean flag = RedisTool.tryGetDistributedLock(jedis, "resource", requestId, 1000);
+            System.out.println("获取锁的结果" + flag);
+            if (flag) {
+                String count = jedis.hget("countMap", "count");
+                if (StringUtils.isEmpty(count)) {
+                    jedis.hset("countMap", "count", "100");
+                } else {
                     Integer countInt = Integer.parseInt(count);
                     System.out.println(Thread.currentThread().getName() + "获得了锁");
                     System.out.println(--countInt);
-                    jedis.hset("countMap","count",countInt+"");
+                    jedis.hset("countMap", "count", countInt + "");
                 }
             }
 
-        }finally {
-            RedisTool.releaseDistributedLock(jedis,"resource",requestId);
+        } finally {
+            boolean flag = RedisTool.releaseDistributedLock(jedis, "resource", requestId);
+            System.out.println("释放锁的结果" + flag);
         }
 
     }
