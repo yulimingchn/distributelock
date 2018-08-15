@@ -9,6 +9,7 @@ import java.util.UUID;
 
 /**
  * @author dawn
+ * redis
  * 模拟分布式锁操作
  */
 public class RedisLockService {

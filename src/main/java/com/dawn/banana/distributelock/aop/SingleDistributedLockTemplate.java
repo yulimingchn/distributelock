@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 分布式锁模板实现
  * @author  Dawn on 2018/7/20.
  */
 @Component

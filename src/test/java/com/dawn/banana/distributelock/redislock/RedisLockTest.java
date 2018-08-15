@@ -2,15 +2,21 @@ package com.dawn.banana.distributelock.redislock;
 
 import com.dawn.banana.distributelock.service.RedisLockService;
 
-public class RedisLockTest  {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-    public static void main(String[] args){
+/**
+ * 测试redis锁
+ */
+public class RedisLockTest {
+
+    public static void main(String[] args) {
+        ExecutorService pool = Executors.newCachedThreadPool();
         RedisLockService redisLockService = new RedisLockService();
-        for (int i= 0;i<50;i++){
-            RedisLockThread redisLockThread = new RedisLockThread(redisLockService);
-            redisLockThread.start();
+        for (int i = 0; i < 50; i++) {
+            pool.submit(new RedisLockThread(redisLockService));
         }
-
+        pool.shutdown();
     }
 
 }

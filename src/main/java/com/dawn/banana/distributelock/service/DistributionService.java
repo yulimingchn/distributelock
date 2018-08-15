@@ -30,7 +30,7 @@ public class DistributionService {
     }
 
     @DistributedLock(argNum = 1,lockNamePost = ".lock")
-    public Integer aspect(String string){
+    public Integer aspect(){
         RMap<String,Integer> map = redissonClient.getMap("distributionTest");
         Integer count = map.get("count");
         if (count > 0){
