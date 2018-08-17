@@ -28,6 +28,8 @@ public class RedisTool {
             System.out.println(requestId+"线程加锁的结果是"+result);
             if (LOCK_SUCCESS.equals(result)) {
                 return true;
+            }else {
+                System.out.println("加锁失败，准备获取锁");
             }
         }
     }

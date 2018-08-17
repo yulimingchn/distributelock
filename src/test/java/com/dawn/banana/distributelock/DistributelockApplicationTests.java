@@ -1,11 +1,16 @@
 package com.dawn.banana.distributelock;
 
+import com.dawn.banana.distributelock.redislock.RedisLockThread;
+import com.dawn.banana.distributelock.service.RedisLockService;
 import com.dawn.banana.distributelock.service.UserInfoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -14,6 +19,8 @@ public class DistributelockApplicationTests {
     @Autowired
     private UserInfoService userInfoService;
 
+    @Autowired
+    private RedisLockService redisLockService ;
 
 
 	@Test
@@ -53,5 +60,19 @@ public class DistributelockApplicationTests {
 	}
 
 
+	@Test
+	public void testRedisLock(){
 
-}
+		ExecutorService pool = Executors.newCachedThreadPool();
+		for (int i = 0; i < 50; i++) {
+			pool.submit(new RedisLockThread(redisLockService));
+			System.out.println("i的值为"+i);
+		}
+		pool.shutdown();
+	}
+
+
+	}
+
+
+
