@@ -22,7 +22,7 @@ public class RabbitConsumer {
      * 监听seckill有消息就读取
      *
      */
-    @RabbitListener(queues = RabbitMQConfig.RABBITMQ_QUEUE_DAWN_USER_INFO_D)
+    //@RabbitListener(queues = RabbitMQConfig.RABBITMQ_QUEUE_DAWN_USER_INFO_D)
     public void recieveMessage(String message){
         //收到通道的消息之后执行秒杀操作
         String [] array = message.split(";");

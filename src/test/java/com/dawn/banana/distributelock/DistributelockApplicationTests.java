@@ -59,7 +59,9 @@ public class DistributelockApplicationTests {
 
 	}
 
-
+	/**
+	 * 测试redis锁
+	 */
 	@Test
 	public void testRedisLock(){
 

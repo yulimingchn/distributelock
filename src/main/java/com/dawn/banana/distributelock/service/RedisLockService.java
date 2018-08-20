@@ -29,9 +29,9 @@ public class RedisLockService {
         String requestId = Thread.currentThread().getName();
         Jedis jedis = jedisPool.getResource();
         try {
-            boolean flag = RedisTool.tryGetDistributedLock(jedis, "resource", requestId, 1000);
-            LOGGER.info("获取锁的结果" + flag);
-            if (flag) {
+            //boolean flag = RedisTool.tryGetDistributedLock(jedis, "resource", requestId, 1000);
+            //LOGGER.info("获取锁的结果" + flag);
+            //if (flag) {
                 String count = jedis.hget("countMap", "count");
                 if (StringUtils.isEmpty(count)) {
                     jedis.hset("countMap", "count", "100");
@@ -41,11 +41,11 @@ public class RedisLockService {
                     LOGGER.info("count="+--countInt);
                     jedis.hset("countMap", "count", countInt + "");
                 }
-            }
+            //}
 
         } finally {
-            boolean flag = RedisTool.releaseDistributedLock(jedis, "resource", requestId);
-            LOGGER.info("释放锁的结果" + flag);
+            //boolean flag = RedisTool.releaseDistributedLock(jedis, "resource", requestId);
+            //LOGGER.info("释放锁的结果" + flag);
         }
 
     }

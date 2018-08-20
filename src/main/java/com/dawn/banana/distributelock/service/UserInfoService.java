@@ -47,14 +47,14 @@ public class UserInfoService {
     /**
      * 消息队列同步积分流水信息
      */
-    @RabbitListener(queues = RabbitMQConfig.RABBITMQ_QUEUE_DAWN_USER_INFO)
+    //@RabbitListener(queues = RabbitMQConfig.RABBITMQ_QUEUE_DAWN_USER_INFO)
     public void pointsFlowSync(String message){
         LOGGER.info("接收到积分流水同步消息，消息内容为"+message);
         UserInfo userInfo = new UserInfo();
         userInfo.setPhone(message);
         int exist = userInfoMapper.selectCount(userInfo);
-        if (exist>0){
-            throw new RuntimeException("用户明细数据已经存在！");
+        if (exist>1){
+            throw new RuntimeException("用户明细数据重复！");
         }
 
         if (exist < 0){
